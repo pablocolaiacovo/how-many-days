@@ -1,0 +1,16 @@
+{
+  "name": "how-many-days",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/pablocolaiacovo/how-many-days.git",
+  "author": "Pablo Colaiacovo <pablo.colaiacovo@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pablocolaiacovo/how-many-days/issues"
+  },
+  "homepage": "https://github.com/pablocolaiacovo/how-many-days#readme"
+}
