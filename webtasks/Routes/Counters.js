@@ -3,11 +3,11 @@ const Story = require('../models/counter');
 
 module.exports = (app) => {
     app.get('/counters', (req, res) => {
-         req.storyModel.find({}).sort({ 'created_at': -1 }).exec((err, stories) => res.json(stories))
+        req.storyModel.find({}).sort({ 'created_at': -1 }).exec((err, stories) => res.json(stories))
     });
 
-    app.get('/counters/:id', (req, res =>{
-        req.storyModel.find({ _id: req.params.id}).exec((err, stories) => res.json(stories))
+    app.get('/counters/:id', (req, res => {
+        req.storyModel.findOne({ _id: req.params.id }).exec((err, stories) => res.json(stories))
     }));
 
     app.post('/counters', (req, res) => {
