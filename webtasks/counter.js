@@ -8,6 +8,6 @@ app.use(bodyParser.json())
 
 // yet to be created
 app.use(require('./middlewares/db').connectDisconnect);
-require('./routes/stories')(app);
+require('./routes/counters')(app);
 
 module.exports = Webtask.fromExpress(app).auth0();

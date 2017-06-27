@@ -1,32 +1,32 @@
 var mongoose = require('mongoose');
-const Story = require('../models/counter');
+const Counter = require('../models/counter');
 
 module.exports = (app) => {
     app.get('/counters', (req, res) => {
-        req.storyModel.find({}).sort({ 'created_at': -1 }).exec((err, stories) => res.json(stories))
+        req.counterModel.find({}).sort({ 'created_at': -1 }).exec((err, counters) => res.json(counters))
     });
 
-    app.get('/counters/:id', (req, res => {
-        req.storyModel.findOne({ _id: req.params.id }).exec((err, stories) => res.json(stories))
-    }));
+    app.get('/counters/:id', (req, res) => {
+        req.counterModel.findOne({ id: req.params.id }).exec((err, counter) => res.json(counter))
+    });
 
     app.post('/counters', (req, res) => {
-        const newStory = new req.storyModel(Object.assign({}, req.body, { created_at: Date.now() }));
-        newStory.save((err, savedStory) => {
-            res.json(savedStory)
+        const newCounter = new req.counterModel(Object.assign({}, req.body, { created_at: Date.now() }));
+        newCounter.save((err, updatedCounter) => {
+            res.json(updatedCounter)
         })
     })
 
     app.put('/counters', (req, res) => {
         const idParam = req.webtaskContext.query.id;
-        req.storyModel.findOne({ _id: idParam }, (err, storyToUpdate) => {
-            const updatedStory = Object.assign(storyToUpdate, req.body);
-            updatedStory.save((err, story) => res.json(story))
+        req.counterModel.findOne({ _id: idParam }, (err, counterToUpdate) => {
+            const updatedCounter = Object.assign(counterToUpdate, req.body);
+            updatedCounter.save((err, counter) => res.json(counter))
         })
     })
 
     app.delete('/counters', (req, res) => {
         const idParam = req.webtaskContext.query.id;
-        req.storyModel.remove({ _id: idParam }, (err, removedStory) => res.json(removedStory));
+        req.counterModel.remove({ _id: idParam }, (err, removedCounter) => res.json(removedCounter));
     })
 }

@@ -12,5 +12,11 @@
   "bugs": {
     "url": "https://github.com/pablocolaiacovo/how-many-days/issues"
   },
-  "homepage": "https://github.com/pablocolaiacovo/how-many-days#readme"
+  "homepage": "https://github.com/pablocolaiacovo/how-many-days#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.0",
+    "webtask-tools": "^3.2.0"
+  }
 }
