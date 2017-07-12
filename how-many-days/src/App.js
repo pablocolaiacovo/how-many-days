@@ -1,19 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import history from './history';
+
+import Nav from './Components/Nav/Nav';
+import Home from './Components/Home/Home';
+import Callback from './Components/Auth/Callback';
+
+import Auth from './Utils/AuthService';
+const auth = new Auth();
+
+const handleAuthentication = (nextState, replace) => {
+  if (/access_token|id_token|error/.test(nextState.location.hash)) {
+    auth.handleAuthentication();
+  }
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <BrowserRouter history={history}>
+        <div className='ui inverted vertical masthead center aligned segment'>
+          <Nav auth={auth} />
+
+          <Switch>
+            <Route path='/' exact render={(props) => <Home auth={auth} {...props} />} />
+            <Route path="/callback" render={(props) => {
+              handleAuthentication(props);
+              return <Callback {...props} />
+            }} />
+            <Route render={function () {
+              return <p>Not Found</p>
+            }} />
+          </Switch>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </BrowserRouter>
     );
   }
 }
